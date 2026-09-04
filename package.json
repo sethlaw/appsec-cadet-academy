@@ -1,0 +1,14 @@
+{
+  "name": "saintcon-appsec-cadet-academy",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Three beginner-friendly AI AppSec missions for SAINTCON 2026.",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

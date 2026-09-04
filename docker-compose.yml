@@ -1,0 +1,6 @@
+services:
+  cadet-academy:
+    build: .
+    ports:
+      - "8086:80"
+    restart: unless-stopped
