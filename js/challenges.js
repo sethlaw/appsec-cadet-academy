@@ -66,8 +66,9 @@ export function findOrder(orderId) {
 export function requestRefund(orderId, tenantId, repair = false) {
   const order = findOrder(orderId);
   if (!order) return { ok: false, message: "Order not found." };
-  if ((repair === true || repair === "ownership") && order.tenantId !== tenantId) return { ok: false, message: `Authorization denied: order ${order.id} belongs to another customer account.`, order };
-  if (repair === "small" && order.amount >= 1000) return { ok: false, message: `Refund denied: $${order.amount.toLocaleString("en-US")}.00 exceeds the automatic refund limit.`, order };
+  const repairs = Array.isArray(repair) ? repair : [repair];
+  if ((repairs.includes(true) || repairs.includes("ownership")) && order.tenantId !== tenantId) return { ok: false, message: `Authorization denied: order ${order.id} belongs to another customer account.`, order };
+  if (repairs.includes("small") && order.amount >= 1000) return { ok: false, message: `Refund denied: $${order.amount.toLocaleString("en-US")}.00 exceeds the automatic refund limit.`, order };
   return { ok: true, message: `Refund approved for ${order.customer} — ${order.item}, $${order.amount.toLocaleString("en-US")}.00.`, order };
 }
 
@@ -75,7 +76,8 @@ export const missionPatches = {
   retrieval: [
     { id: "prompt", label: "Tell the AI to only show Acme records", code: "systemPrompt += ' Only reveal Acme data.'" },
     { id: "tenant", label: "Filter retrieval using the signed-in tenant", code: ".filter(doc => doc.tenantId === session.user.tenantId)" },
-    { id: "hide", label: "Hide tenant labels in the response", code: "delete result.tenantId" }
+    { id: "hide", label: "Hide tenant labels in the response", code: "delete result.tenantId" },
+    { id: "all", label: "All of the above", code: "Apply all three changes together" }
   ],
   xss: [
     { id: "block", label: "Block messages containing the word script", code: "summary.replaceAll('script', '')" },

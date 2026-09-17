@@ -40,7 +40,7 @@ The tests cover both the intentionally vulnerable and repaired behavior for each
 
 ## Re-skinning
 
-Event copy, the completion code, rank labels, color palette, and interaction timing live in [`js/config.js`](js/config.js). The `timing` values control the thinking pause, per-word streaming speed, and delay before evidence appears, making booth pacing easy to tune. Global typography, spacing, and component appearance use CSS custom properties at the top of [`assets/styles.css`](assets/styles.css). Replace [`assets/academy-hero.png`](assets/academy-hero.png) with another wide image while retaining the filename, or update the `.hero` rule to point elsewhere.
+Event copy, the fixed CTF token, rank labels, image paths, color palette, and interaction timing live in [`js/config.js`](js/config.js). The `assets` section selects the community logo, recruitment figure, and academy-ranks graphic. The main hero is referenced beside the stylesheet as `assets/saintcon-appsec-hero.png`, ensuring it resolves correctly under both Node and nginx. The `timing` values control the thinking pause, per-word streaming speed, and delay before evidence appears, making booth pacing easy to tune. Global typography, spacing, and component appearance use CSS custom properties at the top of [`assets/styles.css`](assets/styles.css).
 
 The challenge logic is isolated in [`js/challenges.js`](js/challenges.js), so visual changes do not need to touch vulnerability behavior.
 
@@ -69,7 +69,7 @@ appsec-cadet-academy/
 
 ## Artwork
 
-`assets/academy-hero.png` is original AI-generated artwork created for this project. Generation prompt:
+The OWASP space logo, SAINTCON AppSec hero, recruitment poster, and academy-ranks graphic in `assets/` were supplied by the project organizers. `assets/academy-hero.png` is retained as the original AI-generated concept artwork. Generation prompt:
 
 > An original retro-futurist space academy command deck above a ringed planet, with three mission beacons; screen-printed 1970s science-fiction poster and restrained CRT aesthetics; midnight navy, cyan, teal, amber, coral; visual detail on the right and dark negative space on the left; no logos, lettering, copyrighted characters, or watermark.
 

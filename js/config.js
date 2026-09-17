@@ -3,9 +3,14 @@ export const academyConfig = {
   academy: "AppSec Academy",
   program: "Cadet Field Qualification",
   tagline: "Secure the systems behind the intelligence.",
-  completionCode: "CADET-AI-3",
+  ctfToken: "SC26{APPSEC_CADET_AI_BOUNDARIES}",
   storageKey: "saintcon-appsec-cadet-progress-v1",
   ranks: ["Cadet", "Officer", "Navigator", "Commander"],
+  assets: {
+    logo: "./assets/space-owasp.png",
+    recruitmentPoster: "./assets/appsec-needs-you.png",
+    rankPoster: "./assets/appsec-ranks.png"
+  },
   timing: {
     thinkingMs: 850,
     wordMinMs: 75,
@@ -13,14 +18,14 @@ export const academyConfig = {
     evidenceDelayMs: 500
   },
   theme: {
-    ink: "#07131f",
-    panel: "#0d2230",
-    panelBright: "#153342",
+    ink: "#0c1116",
+    panel: "#141b24",
+    panelBright: "#1e3034",
     cyan: "#73e5f1",
-    teal: "#38b9ad",
-    amber: "#f1b75d",
-    coral: "#e5745d",
-    paper: "#e8e2cb",
-    muted: "#9bb0b7"
+    teal: "#587d80",
+    amber: "#f9c401",
+    coral: "#f8781e",
+    paper: "#f3e5c3",
+    muted: "#d9cba1"
   }
 };

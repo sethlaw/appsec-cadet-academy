@@ -53,3 +53,9 @@ test("refund limit changes behavior but does not enforce ownership", () => {
   assert.equal(requestRefund("GX-9001", "acme", "small").ok, true);
   assert.equal(requestRefund("NV-4418", "acme", "small").ok, false);
 });
+
+test("combined agent repairs enforce every selected control", () => {
+  assert.equal(requestRefund("GX-9001", "acme", ["confirm", "small"]).ok, true);
+  assert.equal(requestRefund("GX-9001", "acme", ["confirm", "ownership"]).ok, false);
+  assert.equal(requestRefund("NV-4418", "nova", ["small", "ownership"]).ok, false);
+});
