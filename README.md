@@ -1,6 +1,6 @@
 # AppSec Cadet Academy
 
-A self-contained, beginner-friendly set of three AI application-security missions for SAINTCON 2026. Attendees secure the application surrounding a simulated AI assistant; no model API, internet connection, database, account, or API key is required.
+A self-contained, beginner-friendly set of three AI application-security missions for SAINTCON 2026. Attendees secure the application surrounding a simulated AI assistant; no model API, database, account, or API key is required. The missions work independently, while anonymous start/completion signals use the central tracker at `https://appsec.community/api/activity` when internet access is available.
 
 ## Missions
 
@@ -48,6 +48,8 @@ The challenge logic is isolated in [`js/challenges.js`](js/challenges.js), so vi
 
 - The included nginx configuration supports SPA routes and adds conservative response headers.
 - Attendee progress is stored only in that browser's `localStorage`.
+- Anonymous activity signals always target `https://appsec.community/api/activity`, including when this academy runs on localhost. No answers or scores are transmitted.
+- **Reset progress** clears academy state plus the anonymous participant and browser-session identifiers, then reloads for the next attendee. Any queued, unsent events are retained for delivery.
 - Reset progress from the header between attendees on a shared station.
 - If the parent lab stack will expose this project, add the directory as a build context and proxy it from the portal, or use port `8086` directly.
 - This directory is intentionally independent and can be moved into its own GitHub repository without changes.

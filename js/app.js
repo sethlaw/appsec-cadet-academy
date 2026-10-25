@@ -1,5 +1,6 @@
 import { academyConfig } from "./config.js";
 import { escapeHtml, missionPatches, renderSummary, requestRefund, retrieveDocuments } from "./challenges.js";
+import { recordActivity, resetActivityIdentity } from "./tracker.js";
 
 const main = document.querySelector("#main");
 const toast = document.querySelector("#toast");
@@ -171,6 +172,7 @@ function bindRepair(id, correctId, verify) {
 
 function completeMission(id) {
   if (!isComplete(id)) state.complete.push(id);
+  recordActivity("cadet", id, "completed");
   saveState();
   notify(`Mission ${missionMeta[id].number} secured.`);
   const next = missionIds[missionIds.indexOf(id) + 1];
@@ -392,9 +394,9 @@ function resetSession(confirmReset = true) {
   if (confirmReset && !window.confirm("Reset all three academy missions?")) return;
   state = { complete: [] };
   saveState();
+  resetActivityIdentity();
   window.location.hash = "#/";
-  route();
-  notify("Training progress reset.");
+  window.location.reload();
 }
 
 function bindCompletion() {
@@ -429,6 +431,7 @@ function route() {
     if (id === "retrieval") { main.innerHTML = retrievalMission(); bindRetrieval(); }
     if (id === "xss") { main.innerHTML = xssMission(); bindXss(); }
     if (id === "agent") { main.innerHTML = agentMission(); bindAgent(); }
+    recordActivity("cadet", id, "started");
   } else main.innerHTML = homeTemplate();
   window.scrollTo({ top: 0, behavior: "instant" });
 }
