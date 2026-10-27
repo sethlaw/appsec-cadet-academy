@@ -3,7 +3,7 @@ export const academyConfig = {
   academy: "AppSec Academy",
   program: "Cadet Field Qualification",
   tagline: "Secure the systems behind the intelligence.",
-  ctfToken: "SC26{APPSEC_CADET_AI_BOUNDARIES}",
+  ctfToken: "HC{APPSEC_CADET_AI_BOUNDARIES}",
   storageKey: "saintcon-appsec-cadet-progress-v1",
   ranks: ["Cadet", "Officer", "Navigator", "Commander"],
   assets: {

@@ -2,9 +2,19 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { escapeHtml, findOrder, renderSummary, requestRefund, retrieveDocuments } from "../js/challenges.js";
+import { academyConfig } from "../js/config.js";
 
 const trackerClient = await readFile(new URL("../js/tracker.js", import.meta.url), "utf8");
 const appClient = await readFile(new URL("../js/app.js", import.meta.url), "utf8");
+const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
+
+test("academy brand returns to the community mission selector", () => {
+  assert.match(html, /<a class="brand" href="\/" aria-label="Return to AppSec Community Academy">/);
+});
+
+test("awards a Hackers Challenge formatted token", () => {
+  assert.match(academyConfig.ctfToken, /^HC\{[^{}]+\}$/);
+});
 
 test("sends activity to the central production tracker", () => {
   assert.match(trackerClient, /https:\/\/appsec\.community\/api\/activity/);

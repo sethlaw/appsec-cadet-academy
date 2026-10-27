@@ -41,7 +41,7 @@ Use **Reset progress** in the header and confirm. This clears only the challenge
 
 ## Completion
 
-The fixed Hackers Challenge token is `SC26{APPSEC_CADET_AI_BOUNDARIES}`. Change `ctfToken` in `js/config.js` before deployment if the CTF requires a different value. The completion dialog provides a copy button but does not submit the token or completion data anywhere. **Reset session** clears local progress and returns the station to the academy home screen for the next attendee.
+The fixed Hackers Challenge token is `HC{APPSEC_CADET_AI_BOUNDARIES}`. Change `ctfToken` in `js/config.js` before deployment if the CTF requires a different value. The completion dialog provides a copy button but does not submit the token or completion data anywhere. **Reset session** clears local progress and returns the station to the academy home screen for the next attendee.
 
 ## Suggested facilitator close
 
