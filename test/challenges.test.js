@@ -33,6 +33,11 @@ test("five minutes of inactivity starts the same full session reset", () => {
   assert.match(appClient, /installIdleReset\(\(\) => resetSession\(false\)\)/);
 });
 
+test("academy logo clears the participant session before returning to the portal", () => {
+  assert.match(appClient, /document\.querySelector\("\.brand"\)\.addEventListener\("click", returnToCommunity\)/);
+  assert.match(appClient, /clearParticipantSession\(\);\s*window\.location\.assign\("\/"\)/);
+});
+
 test("vulnerable retrieval crosses the tenant boundary", () => {
   const results = retrieveDocuments("unresolved password tickets", "acme", false);
   assert.equal(results.some((document) => document.tenantId === "globex"), true);

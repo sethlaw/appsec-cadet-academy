@@ -391,13 +391,23 @@ function completionTemplate() {
   return `<section class="completion"><div class="completion-card" role="dialog" aria-modal="true" aria-labelledby="completion-title"><img class="completion-logo" src="${academyConfig.assets.logo}" alt="OWASP space logo"><p class="eyebrow">Qualification confirmed</p><h1 id="completion-title">Welcome, <span>Cadet.</span></h1><p>You secured the application boundaries around three AI systems. The model was never the security control—you were.</p><div class="lessons"><span>Authorize data before retrieval</span><span>Treat generated output as untrusted</span><span>Enforce ownership inside every tool</span></div><div class="ctf-award"><span>Hackers Challenge CTF token</span><code id="ctf-token">${academyConfig.ctfToken}</code><button class="button" id="copy-token" type="button">Copy token</button></div><button class="button secondary" id="reset-completion" type="button">Reset session</button></div></section>`;
 }
 
+function clearParticipantSession() {
+  state = { complete: [] };
+  localStorage.removeItem(academyConfig.storageKey);
+  resetActivityIdentity();
+}
+
 function resetSession(confirmReset = true) {
   if (confirmReset && !window.confirm("Reset all three academy missions?")) return;
-  state = { complete: [] };
-  saveState();
-  resetActivityIdentity();
+  clearParticipantSession();
   window.location.hash = "#/";
   window.location.reload();
+}
+
+function returnToCommunity(event) {
+  event.preventDefault();
+  clearParticipantSession();
+  window.location.assign("/");
 }
 
 function bindCompletion() {
@@ -440,6 +450,7 @@ function route() {
 document.querySelector("#reset-progress").addEventListener("click", () => {
   resetSession(true);
 });
+document.querySelector(".brand").addEventListener("click", returnToCommunity);
 document.addEventListener("click", (event) => {
   const curriculumLink = event.target.closest('a[href="#curriculum"]');
   if (!curriculumLink) return;
