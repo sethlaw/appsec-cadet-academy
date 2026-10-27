@@ -1,5 +1,6 @@
 import { academyConfig } from "./config.js";
 import { escapeHtml, missionPatches, renderSummary, requestRefund, retrieveDocuments } from "./challenges.js";
+import { installIdleReset } from "./idle-reset.js";
 import { recordActivity, resetActivityIdentity } from "./tracker.js";
 
 const main = document.querySelector("#main");
@@ -448,3 +449,4 @@ document.addEventListener("click", (event) => {
 window.addEventListener("hashchange", route);
 applyTheme();
 route();
+installIdleReset(() => resetSession(false));

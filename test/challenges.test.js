@@ -29,6 +29,10 @@ test("reset progress clears tracker identity and reloads", () => {
   assert.match(appClient, /window\.location\.reload\(\)/);
 });
 
+test("five minutes of inactivity starts the same full session reset", () => {
+  assert.match(appClient, /installIdleReset\(\(\) => resetSession\(false\)\)/);
+});
+
 test("vulnerable retrieval crosses the tenant boundary", () => {
   const results = retrieveDocuments("unresolved password tickets", "acme", false);
   assert.equal(results.some((document) => document.tenantId === "globex"), true);
